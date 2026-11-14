@@ -1,0 +1,45 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+# 本地 conda 环境（不要提交）
+m2f2/
+m2f2_conda/
+.conda_envs_dir_test
+
+# ---- 模型权重与数据集（体积大，按 README 单独下载） ----
+*.safetensors
+*.pth
+*.bin
+*.ckpt
+M2F2_Det-main/checkpoints/*/
+M2F2_Det-main/m2f2-det-7b-4bit/
+M2F2_Det-main/utils/weights/
+M2F2_Det-main/utils/DDVQA_images/
+M2F2_Det-main/utils/DDVQA_split/
+
+# ---- 运行时产物 ----
+*.log
+M2F2_Det-main/tmp/
+M2F2_Det-main/serve_images/
+uploads/
+wandb/
+build_output*.txt
+
+# ---- Java ----
+target/
+*.class
+.idea/
+*.iml
+
+# ---- Node ----
+node_modules/
+dist/
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.DS_Store
+Thumbs.db
+.env

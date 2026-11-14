@@ -1,0 +1,43 @@
+# 鏈嶅姟閰嶇疆
+server:
+  port: 9005
+
+spring:
+  
+  application:
+    name: websocket-service
+
+  # Kafka閰嶇疆
+  kafka:
+    bootstrap-servers: localhost:19092
+    listener:
+      ack-mode: MANUAL
+    consumer:
+      group-id: notification-workers
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.zyn.common.dto.event
+        spring.json.type.mapping: "detectionCompleted:com.zyn.common.dto.event.DetectionCompletedEvent"
+
+  # Redis閰嶇疆锛堝彲閫夛紝鐢ㄤ簬鍒嗗竷寮忎細璇濈鐞嗭級
+  data:
+    redis:
+      host: localhost
+      port: 16379
+      password:
+      database: 0
+
+# WebSocket閰嶇疆
+websocket:
+  max-connections: 10000
+  heartbeat-interval: 30000  # 蹇冭烦闂撮殧锛堟绉掞級
+
+# 鏃ュ織閰嶇疆
+logging:
+  level:
+    root: INFO
+    com.zyn.websocket: DEBUG
+    org.springframework.web.socket: DEBUG

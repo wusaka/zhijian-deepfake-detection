@@ -1,0 +1,14 @@
+# AI瀹㈡埛绔厤缃?ai:
+  service:
+    url: http://localhost:5000
+  client:
+    connect-timeout: 10000    # 杩炴帴瓒呮椂锛堟绉掞級
+    read-timeout: 120000      # 璇诲彇瓒呮椂锛堟绉掞級
+    max-retries: 3
+    retry-interval: 1000
+
+# 鏃ュ織閰嶇疆
+logging:
+  level:
+    com.zyn.aiclient: DEBUG
+    feign: DEBUG

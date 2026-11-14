@@ -1,0 +1,77 @@
+# 鏈嶅姟閰嶇疆
+server:
+  port: 9004
+
+spring:
+  application:
+    name: detection-service
+
+  # datasource
+  datasource:
+    url: jdbc:postgresql://localhost:15432/video_detection
+    username: admin
+    password: admin123
+    driver-class-name: org.postgresql.Driver
+
+  # JPA閰嶇疆
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # Redis閰嶇疆
+  data:
+    redis:
+      host: 192.168.100.104
+      port: 16379
+      password:
+      database: 0
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+
+# 缂撳瓨閰嶇疆
+spring.cache:
+  type: redis
+  redis:
+    time-to-live: 3600000  # 1灏忔椂
+    cache-null-values: false
+
+  # Kafka閰嶇疆
+spring.kafka:
+  bootstrap-servers: localhost:19092
+  consumer:
+    group-id: detection-group
+    auto-offset-reset: earliest
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    properties:
+      spring.json.trusted.packages: "*"
+      spring.json.type.mapping: "detectionTask:com.zyn.common.dto.event.DetectionTaskEvent"
+
+# 鏃ュ織閰嶇疆
+logging:
+  level:
+    root: INFO
+    com.zyn.detection: DEBUG
+
+# AI鏈嶅姟閰嶇疆
+ai:
+  service:
+    url: http://127.0.0.1:5000
+
+# JWT閰嶇疆
+jwt:
+  secret: ${JWT_SECRET:mySecretKeyForJWTTokenGenerationAndValidation12345678901234567890}
+  expiration: 86400000  # 24灏忔椂
+
+
+
+spring.cloud.compatibility-verifier.enabled: false
